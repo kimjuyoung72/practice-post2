@@ -16,9 +16,9 @@ public class Tag {
     private Long id;
 
     private String name;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_id")
+    @JoinColumn(name = "parent_id")
     private Tag parent;
 
     @OneToMany(mappedBy = "parent")

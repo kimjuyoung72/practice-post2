@@ -17,10 +17,10 @@ public class Tag {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Tag parent;
-
-    @OneToMany(mappedBy = "parent")
-    private List<Tag> child = new ArrayList<>();
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "parent_id")
+//    private Tag parent;
+//
+//    @OneToMany(mappedBy = "parent")
+//    private List<Tag> child = new ArrayList<>();
 }

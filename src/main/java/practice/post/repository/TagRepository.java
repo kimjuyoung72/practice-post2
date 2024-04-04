@@ -13,14 +13,23 @@ public class TagRepository {
     
     private final EntityManager em;
 
-    public void saveTag(Tag tag) {
-        if (findTagByName(tag.getName()).size() == 0) {
+    public Long saveTag(Tag tag) {
+        return getSavedTagIdAfterDuplicatedCheck(tag);
+    }
+
+    private Long getSavedTagIdAfterDuplicatedCheck(Tag tag) {
+        List<Tag> tags = findTagByName(tag.getName());
+        if (tags.isEmpty()) {
             em.persist(tag);
+            return tag.getId();
+        } else {
+            return tags.get(0).getId();
         }
     }
 
-    public List<Tag> findTagByName(String name) {
+    private List<Tag> findTagByName(String name) {
         return em.createQuery("select t from Tag t where t.name = :name", Tag.class)
+                .setParameter("name", name)
                 .getResultList();
     }
 }

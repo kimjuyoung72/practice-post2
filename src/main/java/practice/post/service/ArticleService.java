@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import practice.post.domain.Article;
+import practice.post.domain.ArticleTag;
+import practice.post.domain.Tag;
 import practice.post.repository.ArticleRepository;
 
 import java.util.List;
@@ -16,8 +18,12 @@ public class ArticleService {
     private final ArticleRepository repository;
 
     @Transactional
-    public Long register(Article article) {
-        return repository.saveArticle(article);
+    public Long register(Long memberId, String title, String content, String tagName) {
+
+        Tag tag = Tag.createTag(tagName);
+        ArticleTag articleTag = ArticleTag.createArticleTag(tag);
+        Article article = Article.createArticle(memberId, title, content, articleTag);
+        return article.getId();
     }
 
     public Article findArticle(Long id) {

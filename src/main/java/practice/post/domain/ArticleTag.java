@@ -6,18 +6,11 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class ArticleTag {
+public class ArticleTag extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "article_tag_id")
     private Long id;
-
-    public static ArticleTag createArticleTag(Tag tag) {
-        ArticleTag articleTag = new ArticleTag();
-        articleTag.setTag(tag);
-
-        return articleTag;
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
@@ -26,4 +19,10 @@ public class ArticleTag {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     private Tag tag;
+
+    public static ArticleTag createArticleTag(Tag tag) {
+        ArticleTag articleTag = new ArticleTag();
+        articleTag.setTag(tag);
+        return articleTag;
+    }
 }

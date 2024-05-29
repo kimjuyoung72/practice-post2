@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import practice.post.domain.Article;
 import practice.post.domain.ArticleTag;
 import practice.post.domain.Tag;
+import practice.post.dto.PostList;
 import practice.post.repository.ArticleRepository;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class ArticleService {
         return repository.findArticle(id);
     }
 
-    public List<Article> findAllArticle() {
+    public List<PostList> findAllArticle() {
         return repository.findAllArticle();
     }
 }

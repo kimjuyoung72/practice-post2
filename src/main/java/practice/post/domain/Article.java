@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -19,20 +17,7 @@ public class Article extends BaseEntity {
     private String title;
     private String content;
 
-    public static Article createArticle(String title, String content, Member author, ArticleTag... articleTag) {
-        Article article = new Article();
-        article.setTitle(title);
-        article.setContent(content);
-        article.setAuthor(author);
-        for (ArticleTag at : articleTag) {
-            article.addArticleTag(at);
-        }
-        return article;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member author;
+    private Long authorId;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
@@ -40,10 +25,15 @@ public class Article extends BaseEntity {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<ArticleTag> articleTagList = new ArrayList<>();
 
-//    public void addCommentList(Comment comment) {
-//        this.commentList.add(comment);
-//        comment.setParent(this);
-//    }
+    public static Article createArticle(Long authorId, String title, String content, ArticleTag articleTag) {
+        Article article = new Article();
+        article.setTitle(title);
+        article.setContent(content);
+        article.setAuthorId(authorId);
+        article.addArticleTag(articleTag);
+
+        return article;
+    }
     public void addArticleTag(ArticleTag articleTag) {
         this.articleTagList.add(articleTag);
         articleTag.setArticle(this);

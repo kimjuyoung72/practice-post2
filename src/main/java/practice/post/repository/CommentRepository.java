@@ -22,6 +22,11 @@ public class CommentRepository {
         return em.find(Comment.class, id);
     }
 
+    public List<Comment> findCommentByContains(String content) {
+        return em.createQuery("select c from Comment c where c.content like concat('%', :content, '%')", Comment.class)
+                .setParameter("content", content)
+                .getResultList();
+    }
     public List<Comment> findAllComment() {
         return em.createQuery("select c from Comment c", Comment.class)
                 .getResultList();

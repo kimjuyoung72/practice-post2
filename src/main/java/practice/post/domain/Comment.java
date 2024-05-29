@@ -1,12 +1,15 @@
 package practice.post.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
 public class Comment extends BaseEntity {
     @Id
@@ -20,4 +23,12 @@ public class Comment extends BaseEntity {
 
     private String content;
 
+    public static Comment createComment(Article article, String content) {
+        Comment comment = new Comment();
+        comment.setParent(article);
+        comment.setContent(content);
+        article.getCommentList().add(comment);
+
+        return comment;
+    }
 }

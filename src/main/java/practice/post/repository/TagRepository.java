@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class TagRepository {
-    
+
     private final EntityManager em;
 
     public void saveTag(Tag tag) {

@@ -23,13 +23,13 @@
 
 ### 3. Rest API
 - GET/articles : 게시글 목록
-- POST/articles : 게시글 작성
-- GET/articles/{id} : 게시글 상세
-- PUT/articles/{id} : 게시글 수정
+- POST/article : 게시글 작성
+- GET/article/{id} : 게시글 상세
+- PUT/article/{id} : 게시글 수정
 - GET/search/articles : 게시글 검색
-- POST/articles/{id}/comments : 댓글 작성
-- PUT/comments/{id} : 댓글 수정
-- DELETE/comments/{id} : 댓글 삭제
+- POST/article/{id}/comments : 댓글 작성
+- PUT/comment/{id} : 댓글 수정
+- DELETE/comment/{id} : 댓글 삭제
 - GET/search/comments : 댓글 검색
 
 ### 4. Tips(JPA)
